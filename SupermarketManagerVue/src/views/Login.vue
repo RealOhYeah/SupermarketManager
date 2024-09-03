@@ -4,25 +4,15 @@
             <el-form :model="loginForm" ref="loginForm" class="demo-ruleForm">
                 <br />
                 <i class="iconfont icon-r-building" style="font-size: 36px">
-                    <b style="font-size: 28px"> 超市管理系统 </b> </i
-                ><br /><br />
+                    <b style="font-size: 28px"> 超市管理系统 </b> </i><br /><br />
                 <el-form-item prop="username">
                     <el-row>
                         <el-col :span="5" style="text-align: right">
-                            <i
-                                class="iconfont icon-r-user1"
-                                style="font-size: 28px; color: grey"
-                            >
+                            <i class="iconfont icon-r-user1" style="font-size: 28px; color: grey">
                             </i>
                         </el-col>
-                        <el-col
-                            :span="19"
-                            style="text-align: left; padding-left: 10px"
-                        >
-                            <el-input
-                                v-model="loginForm.username"
-                                placeholder="账号"
-                            ></el-input>
+                        <el-col :span="19" style="text-align: left; padding-left: 10px">
+                            <el-input v-model="loginForm.username" placeholder="账号"></el-input>
                         </el-col>
                     </el-row>
                 </el-form-item>
@@ -30,34 +20,22 @@
                 <el-form-item prop="password">
                     <el-row>
                         <el-col :span="5" style="text-align: right">
-                            <i
-                                class="iconfont icon-r-lock"
-                                style="font-size: 28px; color: grey"
-                            >
+                            <i class="iconfont icon-r-lock" style="font-size: 28px; color: grey">
                             </i>
                         </el-col>
-                        <el-col
-                            :span="19"
-                            style="text-align: left; padding-left: 10px"
-                        >
-                            <el-input
-                                type="password"
-                                v-model="loginForm.password"
-                                placeholder="密码"
-                            ></el-input>
+                        <el-col :span="19" style="text-align: left; padding-left: 10px">
+                            <el-input type="password" v-model="loginForm.password" placeholder="密码"></el-input>
                         </el-col>
                     </el-row>
                 </el-form-item>
                 <el-form-item>
-                    <el-button
-                        style="font-size: 18px"
-                        type="primary"
-                        @click="submitForm('loginForm')"
-                    >
-                        <i class="iconfont icon-r-yes" style="font-size: 18px">
-                        </i>
-                        登录</el-button
-                    >
+                    <div style="margin-left:10px; display:inline-block;color:blueviolet;font-style:italic">@欢迎登录我们的网站(⁎⁍̴̛ᴗ⁍̴̛⁎)</div>
+                    <el-button style=" display:inline-block;  margin-left: 25px; font-size: 18px" type="primary"
+                        @click="submitForm('loginForm')">
+                        <i class="iconfont icon-r-yes" style=" font-size: 18px"> </i>
+                        登录
+                    </el-button>
+
                 </el-form-item>
             </el-form>
         </div>
