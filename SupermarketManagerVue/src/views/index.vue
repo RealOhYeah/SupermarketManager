@@ -1,18 +1,18 @@
 <template>
     <el-container>
-        <el-header style="height: 80px">
+        <el-header style=" background-color: rgb(52, 65, 86); height: 80px">
             <el-row>
                 <el-col :span="12" style="margin-top: 20px">
                     <router-link style="text-decoration: none;color: #fff;" to="/home">
 
-                        <i style="color: black; font-size: 32px" class="iconfont icon-r-building">
+                        <i style="  font-size: 32px" class="iconfont icon-r-building">
                             <b style="font-size: 26px"> 超市管理系统</b>
                         </i>
                     </router-link>
                 </el-col>
                 <el-col :span="12" style="text-align: right; margin-top: 15px; cursor: pointer">
                     <el-dropdown>
-                        <div>                       
+                        <div>
                             <el-avatar :size="50" shape="circle" :src="BaseApi + circleUrl"></el-avatar>
                             <b style="
                                     font-size: 24px;
@@ -22,10 +22,10 @@
                                 {{isAdmin ? "Admin - " : "User -"}}
                                 {{ loginName }}
                             </b>
-                         </div>
+                        </div>
 
                         <el-dropdown-menu slot="dropdown">
-                            
+
                             <el-dropdown-item @click.native="informationBtn">个人资料完善</el-dropdown-item>
                             <el-dropdown-item @click.native="empExit">退出</el-dropdown-item>
                             <el-dropdown-item @click.native="logoutVisable = true">注销</el-dropdown-item>
@@ -50,22 +50,30 @@
         </el-dialog>
 
         <el-container>
-            <el-aside width="200px" style="overflow-y: hidden;min-height: 900px;">
-                <el-menu background-color="#6495ED" text-color="white" :router="true" :unique-opened="true"
+            <el-aside width="200px"
+                style="   background-color: rgb(52, 65, 86);  overflow-y: hidden;min-height: 900px;">
+                <el-menu background-color="rgb(52, 65, 86)" text-color="white" :router="true" :unique-opened="true"
                     active-text-color="#FFDEAD">
+
                     <el-submenu v-for="item in menu_catalogs" :key="item.id" :index="item.id + ''">
+
                         <template slot="title">
-                            <i :class="item.icon" style="font-size: 26px; color: white">
+                            <i :class="item.icon" style=" font-size: 26px; color: white">
                                 <b style="font-size: 18px"> {{ item.label }}</b>
                             </i>
                         </template>
+                       
                         <el-menu-item-group>
+
                             <el-menu-item v-for="c in item.children" :key="c.id" :index="c.purl">
                                 <i :class="c.icon" style="font-size: 24px"> </i>
                                 <b style="font-size: 16px"> {{ c.label }}</b>
                             </el-menu-item>
+
                         </el-menu-item-group>
+
                     </el-submenu>
+
                 </el-menu>
             </el-aside>
             <el-main>
@@ -79,18 +87,7 @@ import { clearCookie, loginEmp } from "@/assets/js/auth";
 import { ajaxGet, ajaxPost, popup } from "@/assets/js/common";
 import Cookies from "js-cookie";
 
-export default {
-    mounted() {
-
-        console.log("!!!!");
-
-        console.log(loginEmp());
-        
-        console.log(loginEmp().headImg);
-          
-
-
-    },
+export default { 
     data() {
         return {
             BaseApi: this.$store.state.BaseApi,
@@ -202,17 +199,18 @@ export default {
     width: 151px;
 }
 
-/* .personalFul ul > li {
+.personalFul ul > li {
     margin: 1px auto;
     padding: 0px;
     height: 20px;
     color: #ffffff;
     background-color: #6495ED;
     list-style-type: none;
-} */
+}
 
 .personalFul ul > li:hover {
     background-color: #fc4316;
+    
 }
 
 .el-menu-item i {
