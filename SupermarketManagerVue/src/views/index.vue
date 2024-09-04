@@ -3,8 +3,7 @@
         <el-header style="height: 80px">
             <el-row>
                 <el-col :span="12" style="margin-top: 20px">
-                    <router-link style="text-decoration: none;
-  color: #fff;" to="/home">
+                    <router-link style="text-decoration: none;color: #fff;" to="/home">
 
                         <i style="color: black; font-size: 32px" class="iconfont icon-r-building">
                             <b style="font-size: 26px"> 超市管理系统</b>
@@ -13,21 +12,27 @@
                 </el-col>
                 <el-col :span="12" style="text-align: right; margin-top: 15px; cursor: pointer">
                     <el-dropdown>
-                        <el-avatar :size="50" shape="square" :src="BaseApi + circleUrl"></el-avatar>
-                        <b style="
-                                font-size: 24px;
-                                color: white;
-                                margin-top: -10px;
-                            ">
-                            {{isAdmin ? "管理员 " : "用户 "}}
-                            {{ loginName }}</b>
+                        <div>                       
+                            <el-avatar :size="50" shape="circle" :src="BaseApi + circleUrl"></el-avatar>
+                            <b style="
+                                    font-size: 24px;
+                                    color: white;   
+                                    margin-top: -10px;
+                                ">
+                                {{isAdmin ? "Admin - " : "User -"}}
+                                {{ loginName }}
+                            </b>
+                         </div>
 
                         <el-dropdown-menu slot="dropdown">
+                            
                             <el-dropdown-item @click.native="informationBtn">个人资料完善</el-dropdown-item>
                             <el-dropdown-item @click.native="empExit">退出</el-dropdown-item>
                             <el-dropdown-item @click.native="logoutVisable = true">注销</el-dropdown-item>
                         </el-dropdown-menu>
+
                     </el-dropdown>
+
                 </el-col>
             </el-row>
         </el-header>
