@@ -3,33 +3,24 @@
         <el-header style="height: 80px">
             <el-row>
                 <el-col :span="12" style="margin-top: 20px">
-                    <i
-                        style="color: white; font-size: 32px"
-                        class="iconfont icon-r-building"
-                    >
-                        <b style="font-size: 26px"> 超市管理系统</b></i
-                    >
+                    <router-link style="text-decoration: none;
+  color: #fff;" to="/home">
+
+                        <i style="color: black; font-size: 32px" class="iconfont icon-r-building">
+                            <b style="font-size: 26px"> 超市管理系统</b>
+                        </i>
+                    </router-link>
                 </el-col>
-                <el-col
-                    :span="12"
-                    style="text-align: right; margin-top: 15px; cursor: pointer"
-                >
+                <el-col :span="12" style="text-align: right; margin-top: 15px; cursor: pointer">
                     <el-dropdown>
-                        <el-avatar
-                            :size="50"
-                            shape="square"
-                            :src="BaseApi + circleUrl"
-                        ></el-avatar>
-                        <b
-                            style="
+                        <el-avatar :size="50" shape="square" :src="BaseApi + circleUrl"></el-avatar>
+                        <b style="
                                 font-size: 24px;
                                 color: white;
                                 margin-top: -10px;
-                            "
-                        >
+                            ">
                             {{isAdmin ? "管理员 " : "用户 "}}
-                            {{ loginName }}</b
-                        >
+                            {{ loginName }}</b>
 
                         <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item @click.native="informationBtn">个人资料完善</el-dropdown-item>
@@ -42,60 +33,29 @@
         </el-header>
         <!--注销账户-->
         <el-dialog title="注销账户" :visible.sync="logoutVisable" width="70%">
-            <el-form
-                :model="logoutform"
-                :rules="rules"
-                ref="logoutform"
-                label-width="100px"
-                class="demo-ruleForm"
-            >
+            <el-form :model="logoutform" :rules="rules" ref="logoutform" label-width="100px" class="demo-ruleForm">
                 <el-form-item label="内容" prop="content">
-                    <el-input
-                        v-model="logoutform.content"
-                        placeholder="请填写“本人确定注销”"
-                    ></el-input>
+                    <el-input v-model="logoutform.content" placeholder="请填写“本人确定注销”"></el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button
-                        type="primary"
-                        @click="logoutSubmit('logoutform')"
-                        >确 定</el-button
-                    >
-                    <el-button @click="logoutCel('logoutform')"
-                        >取 消</el-button
-                    >
+                    <el-button type="primary" @click="logoutSubmit('logoutform')">确 定</el-button>
+                    <el-button @click="logoutCel('logoutform')">取 消</el-button>
                 </el-form-item>
             </el-form>
         </el-dialog>
 
         <el-container>
             <el-aside width="200px" style="overflow-y: hidden;min-height: 900px;">
-                <el-menu
-                    background-color="#6495ED"
-                    text-color="white"
-                    :router="true"
-                    :unique-opened="true"
-                    active-text-color="#FFDEAD"
-                >
-                    <el-submenu
-                        v-for="item in menu_catalogs"
-                        :key="item.id"
-                        :index="item.id + ''"
-                    >
+                <el-menu background-color="#6495ED" text-color="white" :router="true" :unique-opened="true"
+                    active-text-color="#FFDEAD">
+                    <el-submenu v-for="item in menu_catalogs" :key="item.id" :index="item.id + ''">
                         <template slot="title">
-                            <i
-                                :class="item.icon"
-                                style="font-size: 26px; color: white"
-                            >
+                            <i :class="item.icon" style="font-size: 26px; color: white">
                                 <b style="font-size: 18px"> {{ item.label }}</b>
                             </i>
                         </template>
                         <el-menu-item-group>
-                            <el-menu-item
-                                v-for="c in item.children"
-                                :key="c.id"
-                                :index="c.purl"
-                            >
+                            <el-menu-item v-for="c in item.children" :key="c.id" :index="c.purl">
                                 <i :class="c.icon" style="font-size: 24px"> </i>
                                 <b style="font-size: 16px"> {{ c.label }}</b>
                             </el-menu-item>
@@ -115,6 +75,17 @@ import { ajaxGet, ajaxPost, popup } from "@/assets/js/common";
 import Cookies from "js-cookie";
 
 export default {
+    mounted() {
+
+        console.log("!!!!");
+
+        console.log(loginEmp());
+        
+        console.log(loginEmp().headImg);
+          
+
+
+    },
     data() {
         return {
             BaseApi: this.$store.state.BaseApi,
