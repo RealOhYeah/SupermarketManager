@@ -109,7 +109,7 @@ const routes = [
                 path: '/personnel_management/dept/list',
                 name: '/personnel_management/dept/list',
                 component: () => import('../views/personnel_management/dept/List.vue')
-            },
+            }, 
             {
                 path: '/personnel_management/employee/list',
                 name: '/personnel_management/employee/list',

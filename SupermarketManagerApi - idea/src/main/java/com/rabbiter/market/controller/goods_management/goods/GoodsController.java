@@ -27,7 +27,12 @@ import java.util.Map;
 public class GoodsController {
     @Autowired
     private IGoodsService goodsService;
-    /*查询信息*/
+
+    /**
+     * 查询信息
+     * @param qo
+     * @return
+     */
     @PostMapping("/queryPageByQo")
     public JsonResult queryPageByQo(QueryGoods qo) {
         Page<GoodsListVo> page = goodsService.queryPageByQo(qo);
@@ -65,19 +70,26 @@ public class GoodsController {
         }
         return map;
     }
+
     /*保存*/
     @PostMapping("/save")
     public JsonResult saveGoods(Goods goods, HttpServletRequest request){
         goodsService.saveGoods(goods,(String) request.getHeader("token"));
         return JsonResult.success();
     }
-    /*上/下架*/
 
+    /*上/下架*/
     @PostMapping("/upOrdown")
     public JsonResult upOrdown(@NotNull(message = "商品编号不能为空") Long gid, String state,HttpServletRequest request){
         goodsService.upOrdown(gid,state,(String) request.getHeader("token"));
         return JsonResult.success();
     }
+
+    /**
+     * 通过Id查询商品信息
+     * @param id
+     * @return
+     */
     @GetMapping("/queryGoodsById")
     public JsonResult queryGoodsById(@NotNull(message = "商品编号不能为空") Long id){
         return JsonResult.success(goodsService.getById(id));

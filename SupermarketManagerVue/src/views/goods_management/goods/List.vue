@@ -513,7 +513,7 @@
         </el-dialog>
     </div>
 </template>
-<script>
+<script> 
 import { popup } from "@/assets/js/common";
 import {
     queryPageByQo,

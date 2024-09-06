@@ -19,24 +19,46 @@ import java.util.Map;
 @Validated
 @RequestMapping("/sale_management/sale_record")
 public class SaleRecordController {
+
     @Autowired
     private ISaleRecordsService saleRecordsService;
+
+    /**
+     * 获取订单销售的id
+     * @return
+     */
     @GetMapping("/getCn")
     public JsonResult getCn(){
         return JsonResult.success(IdWorker.getIdStr());
     }
+
+    /**
+     * 查询有存货的商品
+     * @return
+     */
     @GetMapping("/getOptionSaleRecordsGoods")
     public JsonResult getOptionSaleRecordsGoods(){
         List<Map<String,Object>> list=saleRecordsService.getOptionSaleRecordsGoods();
         return JsonResult.success(list);
     }
 
+    /**
+     * 保存销售订单记录
+     * @param saleRecords
+     * @param request
+     * @return
+     */
     @PostMapping("/saveSaleRecords")
     public JsonResult saveSaleRecords(@RequestBody SaleRecords saleRecords, HttpServletRequest request){
         saleRecords=saleRecordsService.saveSaleRecords(saleRecords,(String) request.getHeader("token"));
         return JsonResult.success(saleRecords);
     }
 
+    /**
+     *
+     * @param qo
+     * @return
+     */
     @HasPermisson("sale_management:sale_records:list")
     @PostMapping("/queryPageByQoSaleRecords")
     public JsonResult queryPageByQoSaleRecords(QuerySaleRecords qo){
@@ -44,6 +66,11 @@ public class SaleRecordController {
         return JsonResult.success(page);
     }
 
+    /**
+     *
+     * @param cn
+     * @return
+     */
     @GetMapping("/delSaleRecords")
     public JsonResult delSaleRecords(String cn){
         saleRecordsService.delSaleRecords(cn);

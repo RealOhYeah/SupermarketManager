@@ -104,7 +104,7 @@
                                 type="radio"
                                 v-model="newForm.sellway"
                                 label="1"
-                                >微信</el-radio
+                                >微信</el-radio 
                             >
                             <el-radio
                                 disabled
@@ -1106,8 +1106,7 @@ export default {
                 (res) => {
                     res = res.data;
                     if (res.code == 200) {
-                        this.detailSaleRecords.goodsPrice =
-                            res.data.purchashPrice;
+                        this.detailSaleRecords.goodsPrice = res.data.purchashPrice;
                         this.detailSaleRecords.goodsName = res.data.name;
                         this.goodsNum_max = res.data.residueNum;
                     }

@@ -39,6 +39,8 @@ public class SaleRecordsServiceImpl extends ServiceImpl<SaleRecordsMapper, SaleR
 
     @Override
     public List<Map<String, Object>> getOptionSaleRecordsGoods() {
+
+        //构建查询条件(剩余商品大于0的查询)
         QueryWrapper<Goods> wrapper = new QueryWrapper<Goods>().gt("residue_num", 0L);
         List<Goods> list = goodsService.list(wrapper);
         List<Map<String, Object>> goodsList = new ArrayList<>();
@@ -54,13 +56,21 @@ public class SaleRecordsServiceImpl extends ServiceImpl<SaleRecordsMapper, SaleR
         return goodsList;
     }
 
+    /**
+     * 保存销售记录
+     * @param saleRecords
+     * @param token
+     * @return
+     */
     @Override
     public SaleRecords saveSaleRecords(SaleRecords saleRecords, String token) {
+
         Employee employee = JSON.parseObject(redisTemplateService.getCacheObject(token), Employee.class);
         saleRecords.setEid(employee.getId());
         saleRecords.setSellTime(new Date());
         saleRecords.setSellby(employee.getNickName());
         saleRecords.setState(SaleRecords.STATE_NORMAL);
+
         for (DetailSaleRecords detailSaleRecord : saleRecords.getDetailSaleRecords()) {
             detailSaleRecord.setSellCn(saleRecords.getCn());
             Goods goods = goodsService.getById(detailSaleRecord.getGoodsId());
@@ -70,9 +80,16 @@ public class SaleRecordsServiceImpl extends ServiceImpl<SaleRecordsMapper, SaleR
                     .eq("id", goods.getId());
             goodsService.update(wrapper);
         }
+
+        // 保存每件商品的销售记录
         detailSaleRecordsService.saveBatch(saleRecords.getDetailSaleRecords());
+
+        //保存销售订单的记录
         super.save(saleRecords);
+
+        //是否为会员消费
         if ("1".equals(saleRecords.getType())) {
+
             //为会员增加积分 积分规则：积分=总金额*5%取整
             String s = saleRecords.getSellTotalmoney() * 0.05 + "";
             long integral = Long.parseLong(s.split("\\.")[0]);
@@ -84,6 +101,7 @@ public class SaleRecordsServiceImpl extends ServiceImpl<SaleRecordsMapper, SaleR
                     .eq("phone", saleRecords.getMemberPhone());
             memberService.update(memberUpdateWrapper);
         }
+
         return saleRecords;
     }
 
