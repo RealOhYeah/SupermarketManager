@@ -35,7 +35,7 @@
             </el-col>
         </div>
         <!--销售-->
-        <el-dialog title="销售商品" :visible.sync="newVisable" width="80%">
+        <el-dialog title="销售商品" :visible.sync="newVisable">
             <el-form
                 :model="newForm"
                 :rules="rules"
@@ -424,7 +424,7 @@
             </el-form>
         </el-dialog>
         <!--添加商品表单-->
-        <el-dialog title="添加商品" :visible.sync="addGoodsVisable" width="70%">
+        <el-dialog title="添加商品" :visible.sync="addGoodsVisable">
             <el-form
                 :model="detailSaleRecords"
                 :rules="rules"

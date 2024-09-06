@@ -199,14 +199,14 @@ export default {
     width: 151px;
 }
 
-.personalFul ul > li {
+/* .personalFul ul > li {
     margin: 1px auto;
     padding: 0px;
     height: 20px;
     color: #ffffff;
     background-color: #6495ED;
     list-style-type: none;
-}
+} */
 
 .personalFul ul > li:hover {
     background-color: #fc4316;
