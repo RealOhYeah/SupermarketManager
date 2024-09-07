@@ -824,8 +824,11 @@ export default {
             queryMemberByGoodsId({
                 goodsId: this.pointProductsForm.goodsId,
             }).then((res) => {
+                console.log(res);
                 res = res.data;
                 if (res.code == 200) {
+                    
+                console.log(res);
                     this.options_members = res.data;
                     if (!this.options_members.length) {
                         popup("该商品没有会员符合条件进行兑换", "warning");
@@ -833,6 +836,8 @@ export default {
                         return;
                     }
                 } else {
+
+                    console.log(res);
                     popup(res.msg, "error");
                 }
             });
@@ -849,6 +854,10 @@ export default {
         },
         queryOptionsMember() {
             queryOptionsMember().then((res) => {
+                console.log("!!!!!");
+                console.log(res);
+                console.log(res.data);
+                
                 res = res.data;
                 if (res.code == 200) {
                     this.options_members = res.data;
