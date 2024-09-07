@@ -105,8 +105,11 @@ public class LoginServiceImpl extends ServiceImpl<EmployeeMapper, Employee> impl
         if (redisTemplateService.hasKey(token)){
             String str = redisTemplateService.getCacheObject(token);
             Employee employee = JSONObject.parseObject(str, Employee.class);
+
             String login_error_pwdnum = RedisKeys.LOGIN_ERRO_PWDNUM.join(employee.getUsername());
             redisTemplateService.deleteObject(token);
+
+            //此处也同时删除密码登录错误次数缓存
             redisTemplateService.deleteObject(login_error_pwdnum);
         }
     }
