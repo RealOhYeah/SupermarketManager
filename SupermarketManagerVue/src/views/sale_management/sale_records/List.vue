@@ -13,7 +13,7 @@
         <el-row>
             <el-col :span="4">
                 <el-input
-                    style="height: 21px; width: 130px"
+                    style="height: 21px; width: 300px"
                     placeholder="销售编号"
                     v-model="searchForm.cn"
                 />
