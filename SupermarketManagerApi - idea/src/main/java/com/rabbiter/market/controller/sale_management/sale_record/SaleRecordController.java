@@ -55,7 +55,7 @@ public class SaleRecordController {
     }
 
     /**
-     *
+     * 分页查询销售订单记录
      * @param qo
      * @return
      */
@@ -67,7 +67,7 @@ public class SaleRecordController {
     }
 
     /**
-     *
+     * 删除销售订单记录
      * @param cn
      * @return
      */

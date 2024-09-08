@@ -33,6 +33,11 @@ public class ExchangePointProductsRecordsController {
     }
 
 
+    /**
+     * 根据商品的id来查询会员是否有充足的积分兑换商品。（对积分不足的会员进行筛选）
+     * @param goodsId
+     * @return
+     */
     @GetMapping("/queryMemberByGoodsId")
     public JsonResult queryMemberByGoodsId(Long goodsId) {
         List<Map<String, Object>> list = exchangePointProductsService.queryMemberByGoodsId(goodsId);

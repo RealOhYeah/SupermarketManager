@@ -158,8 +158,8 @@ public class ExchangePointProductsServiceImpl extends ServiceImpl<ExchangePointP
         for (Member member : list) {
             Map<String, Object> map = new HashMap<>();
             map.put("id", member.getId());
-            map.put("phone", member.getPhone());
-            map.put("name", member.getName());
+            map.put("name", member.getPhone());
+//            map.put("name", member.getName());
             vos.add(map);
         }
         return vos;
