@@ -184,6 +184,24 @@ export default {
 };
 </script>
 <style>
+.el-menu-item {
+    background-color: #222d3d !important;
+}
+ 
+
+.el-menu-item-group__title {
+    padding: 0px !important;
+}
+
+.el-menu-item:hover {
+    background-color: #051528 !important;}
+
+
+.el-submenu__title:hover {
+    background-color: #051528 !important;
+}
+
+
 .avatar {
     display: inline-block;
     width: 200px;
