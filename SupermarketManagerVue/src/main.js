@@ -14,6 +14,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 import '@/assets/css/globel.css'
 import qs from 'qs';
 import './assets/font/iconfont.css'
+import './assets/font/new/iconfont.css'
+
 import axios from 'axios'
 Vue.prototype.qs = qs;
 Vue.prototype.$axios = axios

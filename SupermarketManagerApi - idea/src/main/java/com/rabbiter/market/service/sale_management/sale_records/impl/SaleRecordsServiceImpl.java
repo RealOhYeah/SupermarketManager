@@ -22,6 +22,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
 
 @Service
@@ -91,8 +93,17 @@ public class SaleRecordsServiceImpl extends ServiceImpl<SaleRecordsMapper, SaleR
         if ("1".equals(saleRecords.getType())) {
 
             //为会员增加积分 积分规则：积分=总金额*5%取整
-            String s = saleRecords.getSellTotalmoney() * 0.05 + "";
-            long integral = Long.parseLong(s.split("\\.")[0]);
+//            String s = saleRecords.getSellTotalmoney() * 0.05 + "";
+//            long integral = Long.parseLong(s.split("\\.")[0]);
+
+            Double totalMoneyDouble = saleRecords.getSellTotalmoney();
+            // 将Double转换为BigDecimal
+            BigDecimal totalMoney = BigDecimal.valueOf(totalMoneyDouble);
+            // 计算45%的积分。（采用四舍五入的形式）
+            BigDecimal integralBigDecimal = totalMoney.multiply(new BigDecimal("0.45")).setScale(0, RoundingMode.HALF_UP);
+            // 转换为长整型积分
+            long integral = integralBigDecimal.longValue();
+
             QueryWrapper<Member> memberQueryWrapper = new QueryWrapper<Member>().eq("phone", saleRecords.getMemberPhone());
             Member member = memberService.getOne(memberQueryWrapper);
             UpdateWrapper<Member> memberUpdateWrapper = new UpdateWrapper<Member>()
@@ -100,6 +111,7 @@ public class SaleRecordsServiceImpl extends ServiceImpl<SaleRecordsMapper, SaleR
                             integral : integral)
                     .eq("phone", saleRecords.getMemberPhone());
             memberService.update(memberUpdateWrapper);
+
         }
 
         return saleRecords;
@@ -109,8 +121,11 @@ public class SaleRecordsServiceImpl extends ServiceImpl<SaleRecordsMapper, SaleR
     public Page<SaleRecords> queryPageByQoSaleRecords(QuerySaleRecords qo) {
         Page<SaleRecords> page = new Page<>(qo.getCurrentPage(), qo.getPageSize());
         QueryWrapper<SaleRecords> queryWrapper = new QueryWrapper<>();
+        //查询正常状态的
         queryWrapper.eq("state", SaleRecords.STATE_NORMAL);
+        //查询类型
         queryWrapper.eq(StringUtils.hasText(qo.getType()), "type", qo.getType());
+        //查询销售员
         queryWrapper.likeRight(StringUtils.hasText(qo.getCn()), "cn", qo.getCn());
         queryWrapper.ge(StringUtils.hasText(qo.getStartSellTime()), "sell_time", qo.getStartSellTime());
         queryWrapper.le(StringUtils.hasText(qo.getEndSellTime()), "sell_time", qo.getEndSellTime());

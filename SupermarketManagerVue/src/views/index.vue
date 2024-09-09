@@ -5,10 +5,14 @@
                 <el-col :span="12" style="margin-top: 20px">
                     <router-link style="text-decoration: none;color: #fff;" to="/home">
 
-                        <i style="  font-size: 32px" class="iconfont icon-r-building">
+                        <i style="  font-size: 32px" class="iconfont icon-fuwuchaoshi">
                             <b style="font-size: 26px"> 超市管理系统</b>
                         </i>
+
+                        
+
                     </router-link>
+
                 </el-col>
                 <el-col :span="12" style="text-align: right; margin-top: 15px; cursor: pointer">
                     <el-dropdown>
@@ -59,15 +63,15 @@
 
                         <template slot="title">
                             <i :class="item.icon" style=" font-size: 26px; color: white">
-                                <b style="font-size: 18px"> {{ item.label }}</b>
+                                <b style="font-size: 20px;font-family: 'SimSun'"> {{ item.label }}</b>
                             </i>
                         </template>
-                       
+
                         <el-menu-item-group>
 
                             <el-menu-item v-for="c in item.children" :key="c.id" :index="c.purl">
-                                <i :class="c.icon" style="font-size: 24px"> </i>
-                                <b style="font-size: 16px"> {{ c.label }}</b>
+                                <i :class="c.icon" style="font-size: 25px"> </i>
+                                <b style="font-size: 17px;font-family: 'SimSun'"> {{ c.label }}</b>
                             </el-menu-item>
 
                         </el-menu-item-group>

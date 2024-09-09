@@ -21,7 +21,7 @@ module.exports={
   configureWebpack: config => {
     Object.assign(config,{
       entry: {
-         app: '/src/main.ts'
+         app: '/src/main.js'
       },
       // 输出重构 打包编译后的js文件名称，添加时间戳
       output: {

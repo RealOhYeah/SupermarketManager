@@ -5,8 +5,8 @@ import java.io.Serializable;
 import java.util.Map;
 
 public class BaseQuery implements Serializable {
-    private Integer currentPage=1;
-    private Integer pageSize=3;
+    private Integer currentPage=1;//当前页
+    private Integer pageSize=3;//每页显示条数
     private Map<String,Object> params;//其他请求参数
     public Integer getStart(){
         return (currentPage-1)*pageSize;
