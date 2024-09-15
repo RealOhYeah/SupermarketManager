@@ -59,11 +59,14 @@ public class DeptServiceImpl extends ServiceImpl<DeptMapper, Dept> implements ID
     @Override
     public void updateDept(Dept dept) {
         if (Dept.STATE_BAN.equals(dept.getState())){
+
+            //通过下方的该部门员工查询，如果该部门有员工，则不能停用此部门
             QueryWrapper<Employee> empWrapper = new QueryWrapper<Employee>().eq(dept.getId() != null,"deptId", dept.getId());
             List<Employee> list = employeeService.list(empWrapper);
             if (list!=null &&list.size()>0){
                 throw new BusinessException("操作失败，该部门正在使用");
             }
+
         }
         super.updateById(dept);
     }

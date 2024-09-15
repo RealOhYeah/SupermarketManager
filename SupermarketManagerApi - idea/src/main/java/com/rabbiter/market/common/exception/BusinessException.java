@@ -10,4 +10,5 @@ public class BusinessException extends SysException {
     public BusinessException(String msg) {
         super(msg, HttpStatus.CODE_BUSINESS_ERROR);
     }
+
 }

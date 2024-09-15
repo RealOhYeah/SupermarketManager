@@ -136,6 +136,7 @@
                                     () => {
                                         if (this.newForm.type == '1') {
                                             this.newForm.sellTotalmoney = (
+                                                // 此处实现顾客的九折优惠
                                                 this.totalMoney * 0.9
                                             ).toFixed(2);
                                         } else {

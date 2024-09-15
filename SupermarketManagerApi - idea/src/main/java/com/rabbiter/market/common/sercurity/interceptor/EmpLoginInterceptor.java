@@ -65,6 +65,7 @@ public class EmpLoginInterceptor implements HandlerInterceptor {
                     //缓存有值,延长存储时间
                     redisTemplateService.expire(token, RedisKeys.LOGIN_USER.getTimeout(), RedisKeys.LOGIN_USER.getTimeUnit());
                 }
+
             } else {
                 //没有token
                 JsonResult res = JsonResult.error(HttpStatus.CODE_BUSINESS_ERROR, "请先登录");
@@ -73,6 +74,7 @@ public class EmpLoginInterceptor implements HandlerInterceptor {
                 response.getWriter().flush();
                 return false;
             }
+
         }
         //是否贴有HasPermisson注解
         HasPermisson hasPermisson = handler1.getMethodAnnotation(HasPermisson.class);
@@ -81,16 +83,30 @@ public class EmpLoginInterceptor implements HandlerInterceptor {
                 //没有token
                 JsonResult res = JsonResult.error(HttpStatus.CODE_BUSINESS_ERROR, "请先登录");
                 String result = JSONObject.toJSONString(res);
+
+                /**
+                 * 这两行代码首先通过response.getWriter()获取一个PrintWriter对象，
+                 * 该对象允许我们向HTTP响应中写入内容。
+                 * 然后，使用println方法将之前生成的JSON字符串result写入响应体。
+                 * flush方法确保所有缓冲的输出都被发送到客户端。这样，客户端就能接收到一个包含错误信息的JSON响应。
+                 * 最后，我们调用flush方法确保所有缓冲的输出都被发送到客户端。
+                 * 这样，客户端就能接收到一个包含错误信息的JSON响应。
+                 */
                 response.getWriter().println(result);
                 response.getWriter().flush();
+
                 return false;
+
             }
+
             Employee employee = JSONObject.parseObject(redisTemplateService.getCacheObject(token), Employee.class);
             //判断是否是系统管理员
             if (employee.getIsAdmin()) {
                 return true;
             }
+
             String value = hasPermisson.value();
+            // 此处从token中判断是否有该权限来进行操作（t_menu中的flag字段）
             boolean contains = employee.getFlags().contains(value);
             if (!contains) {
                 JsonResult res = JsonResult.error(HttpStatus.CODE_BUSINESS_ERROR, "您没有权限操作");

@@ -27,21 +27,32 @@ public class DeptController {
     }
 
     @HasPermisson("personnel_management:dept:update")
-    /*修改接口*/
+    /**
+     * 更改部门的信息
+     */
     @PostMapping("/update")
     public JsonResult updateDept(Dept dept){
         deptService.updateDept(dept);
         return JsonResult.success();
     }
 
-    /*停用*/
+    /**
+     * 停用目标部门
+     * @param id
+     * @return
+     */
     @HasPermisson("personnel_management:dept:deactivate")
     @PostMapping("/deactivate")
     public JsonResult deactivate(Long id){
         deptService.forbiddenRole(id);
         return JsonResult.success();
     }
-    /*查询信息*/
+
+    /**
+     * 查询所有部门信息
+     * @param qo
+     * @return
+     */
     @GetMapping("/list")
     public JsonResult listByQo(QueryDept qo){
         return JsonResult.success(deptService.listByQo(qo));

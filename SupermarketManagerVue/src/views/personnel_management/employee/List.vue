@@ -224,7 +224,7 @@
         </div>
         <!--用户详情-->
         <el-dialog :visible.sync="detailVisable" width="50%">
-            <el-descriptions :model="detailForm" column="2" title="员工信息">
+            <el-descriptions :model="detailForm" :column="2" title="员工信息">
                 <el-descriptions-item label="用户名">{{
                     detailForm.username
                 }}</el-descriptions-item>
@@ -427,6 +427,7 @@
                 </el-form-item>
             </el-form>
         </el-dialog>
+
         <!--修改-->
         <el-dialog
             title="修改员工"
@@ -583,6 +584,7 @@
                 </el-form-item>
             </el-form>
         </el-dialog>
+
         <!--角色列表-->
         <el-dialog title="分配职务" :visible.sync="empRoleVisable">
             <div>
@@ -625,7 +627,7 @@
                 </el-select>
             </div>
             <br>
-            <el-button type="primary" @click="submitRoleBtn" style="font-size: 18px;">
+            <el-button type="primary" @click="submitRoleBtn" style="font-size: 18px;"> 
                 <i class="iconfont icon-r-yes" style="font-size: 18px;"> </i> 提交</el-button>
             <el-button @click="roleBtnCancel" style="font-size: 18px;">取消</el-button>
         </el-dialog>
@@ -733,7 +735,7 @@ export default {
             });
         },
         getRoleAll() {
-            getAllRole().then((res) => {
+            getAllRole().then((res) => { 
                 res = res.data;
                 if (res.code == 200) {
                     this.allRoles = res.data;

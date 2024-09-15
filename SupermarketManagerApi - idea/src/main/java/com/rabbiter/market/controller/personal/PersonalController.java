@@ -34,6 +34,8 @@ public class PersonalController {
         employeeService.edit_pwd(editPwd,token);
         return JsonResult.success();
     }
+
+
     @HasPermisson("personnel_management:employee:update")
     @GetMapping("/information")
     public JsonResult information(HttpServletRequest request){

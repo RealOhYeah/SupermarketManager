@@ -3,13 +3,12 @@
         <el-breadcrumb separator="/">
             <el-breadcrumb-item>首页</el-breadcrumb-item>
             <el-breadcrumb-item>库存管理 </el-breadcrumb-item>
-            <el-breadcrumb-item>仓库管理</el-breadcrumb-item> </el-breadcrumb
-        ><br />
+            <el-breadcrumb-item>仓库管理</el-breadcrumb-item> </el-breadcrumb><br />
 
         <el-row>
             <el-col :span="8" style="text-align: left;padding-right: 10px;">
-                <el-input placeholder="仓库名称" v-model="searchForm.name"/>
-                
+                <el-input placeholder="仓库名称" v-model="searchForm.name" />
+
             </el-col>
             <el-col :span="8">
                 <el-select v-model="searchForm.state" placeholder="请选择状态" clearable>
@@ -21,76 +20,47 @@
         <br />
         <el-row>
             <el-col :span="24" style="text-align: left">
-                <el-button
-                    type="primary"
-                    @click="subSearchForm"
-                    style="font-size: 18px"
-                >
+                <el-button type="primary" @click="subSearchForm" style="font-size: 18px">
                     <i class="iconfont icon-r-find" style="font-size: 18px">
                     </i>
-                    搜索</el-button
-                >
-                <el-button
-                    type="success"
-                    @click="newVisable = true"
-                    style="font-size: 18px"
-                >
+                    搜索</el-button>
+                <el-button type="success" @click="newVisable = true" style="font-size: 18px">
                     <i class="iconfont icon-r-add" style="font-size: 18px"> </i>
                     创建仓库
                 </el-button>
             </el-col>
         </el-row>
         <br />
-        <el-table
-                :data="tableData"
-                style="width: 100%">
-            <el-table-column
-                    type="index"
-                    label="序号"
-                    width="180">
+        <el-table :data="tableData" style="width: 100%">
+            <el-table-column type="index" label="序号" width="180">
             </el-table-column>
-            <el-table-column
-                    prop="name"
-                    label="名称"
-                    width="180">
+            <el-table-column prop="name" label="名称" width="180">
             </el-table-column>
-            <el-table-column
-                    prop="address"
-                    label="地址"
-                    width="180">
+            <el-table-column prop="address" label="地址" width="180">
             </el-table-column>
-            <el-table-column
-                    prop="info"
-                    :show-overflow-tooltip="true"
-                    label="描述">
+            <el-table-column prop="info" :show-overflow-tooltip="true" label="描述">
             </el-table-column>
-            <el-table-column
-                    prop="state"
-                    label="状态">
+            <el-table-column prop="state" label="状态">
                 <template v-slot="scope">
                     <el-tag v-if="scope.row.state=='0'" type="success">正常</el-tag>
                     <el-tag v-else type="danger">停用</el-tag>
                 </template>
             </el-table-column>
-            <el-table-column width="240" fixed="right"
-                    label="操作">
+            <el-table-column width="240" fixed="right" label="操作">
                 <template v-slot="scope">
                     <el-button type="success" style="font-size: 18px;" @click="editStore(scope.row)">
                         <i class="iconfont icon-r-edit" style="font-size: 18px;"> </i>
-                         修改
+                        修改
                     </el-button>
-                    <el-button  style="font-size: 18px;" type="danger" @click="forbidden(scope.row.id)">
+                    <el-button style="font-size: 18px;" type="danger" @click="forbidden(scope.row.id)">
                         <i class="iconfont icon-r-no" style="font-size: 18px;"> </i>
-                         停用
+                        停用
                     </el-button>
                 </template>
             </el-table-column>
         </el-table>
         <!--修改仓库弹出框-->
-        <el-dialog
-                title="仓库信息修改"
-                :visible.sync="dialogVisible"
-                width="50%">
+        <el-dialog title="仓库信息修改" :visible.sync="dialogVisible" width="50%">
             <el-form v-model="editForm" label-width="100px" class="demo-ruleForm">
                 <el-form-item label="名称：">
                     <el-input v-model="editForm.name"></el-input>
@@ -102,32 +72,22 @@
                     <el-input type="text" v-model="editForm.info"></el-input>
                 </el-form-item>
                 <el-form-item label="状态：">
-                    <el-select v-model="editForm.state"
-                               clearable
-                               @change="$forceUpdate()"
-                               placeholder="请选择状态">
-                        <el-option
-                                v-for="item in options"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value">
+                    <el-select v-model="editForm.state" clearable @change="$forceUpdate()" placeholder="请选择状态">
+                        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
                         </el-option>
                     </el-select>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="submitEditForm" style="font-size: 18px;">
                         <i class="iconfont icon-r-yes" style="font-size: 18px;"> </i>
-                         提交
+                        提交
                     </el-button>
-                    <el-button  style="font-size: 18px;" @click="editCancel">取消</el-button>
+                    <el-button style="font-size: 18px;" @click="editCancel">取消</el-button>
                 </el-form-item>
             </el-form>
         </el-dialog>
         <!--创建仓库弹出框-->
-        <el-dialog
-                title="创建仓库"
-                :visible.sync="newVisable"
-                width="50%">
+        <el-dialog title="创建仓库" :visible.sync="newVisable" width="50%">
             <el-form :model="newForm" :rules="rules" ref="newForm" label-width="100px" class="demo-ruleForm">
                 <el-form-item label="名称：" prop="name">
                     <el-input v-model="newForm.name"></el-input>
@@ -135,7 +95,7 @@
                 <el-form-item label="地址：" prop="address">
                     <el-input type="text" v-model="newForm.address"></el-input>
                 </el-form-item>
-                <el-form-item label="描述：">
+                <el-form-item label="描述：" prop="info">
                     <el-input type="text" v-model="newForm.info"></el-input>
                 </el-form-item>
                 <el-form-item>
@@ -172,6 +132,7 @@
                     address:[
                         {required: true, message: '地名不能为空', trigger: 'blur'},
                     ],
+                    info:[]
                 }
 
             }

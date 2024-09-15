@@ -74,7 +74,12 @@ public class EmployeeController {
         return map;
     }
 
-    /*保存*/
+    /**
+     * 创建员工
+     * @param employee
+     * @param request
+     * @return
+     */
     @HasPermisson("personnel_management:employee:save")
     @PostMapping("/save")
     public JsonResult saveEmp(Employee employee, HttpServletRequest request) {
@@ -82,7 +87,11 @@ public class EmployeeController {
         return JsonResult.success();
     }
 
-    /*修改按钮*/
+    /**
+     * 修改员工信息
+     * @param uid
+     * @return
+     */
     @HasPermisson("personnel_management:employee:update")
     @GetMapping("/editbtn")
     public JsonResult editbtn(Long uid) {

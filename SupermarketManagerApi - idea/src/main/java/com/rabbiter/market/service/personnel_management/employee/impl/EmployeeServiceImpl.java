@@ -77,7 +77,7 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee> i
                 .like(StringUtils.hasText(qo.getNickName()), "nick_name", qo.getNickName())
                 .like(StringUtils.hasText(qo.getAddress()), "address", qo.getAddress())
                 .eq(StringUtils.hasText(qo.getSex()), "sex", qo.getSex())
-                .ne("id", 1L)
+                .ne("id", 1L) //排除超级管理员的查询
                 .eq(qo.getDeptId() != null, "deptId", qo.getDeptId());
         super.page(page, wrapper);
         //补全部门信息
@@ -126,39 +126,53 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee> i
 
     @Override
     public void saveEmp(Employee employee, String token) {
-        //校验参数是否有误
-        if (!StringUtils.hasLength(employee.getPassword())) {
-            employee.setPassword(Employee.DEFAULT_PWD);
-        }
+
         if (!StringUtils.hasLength(employee.getUsername())) {
             throw new BusinessException("手机号不能为空");
         }
-        if (!StringUtils.hasLength(employee.getIdCard())) {
-            throw new BusinessException("身份证号不能为空");
-        }
-        if (employee.getAge() == null) {
-            employee.setAge(18);
-        } else if (employee.getAge() < 0 || employee.getAge() > 120) {
-            throw new BusinessException("年龄值有误");
-        }
+
         //校验用户是否已注册
         QueryWrapper<Employee> wrapper = new QueryWrapper<Employee>().eq("phone", employee.getUsername());
         Employee one = super.getOne(wrapper);
         if (one != null) {
             throw new BusinessException("系统中已存在该账户");
         }
+
+        //校验参数是否有误
+        if (!StringUtils.hasLength(employee.getPassword())) {
+
+            //密码传输为空时，设置默认密码为Employee.DEFAULT_PWD
+            employee.setPassword(Employee.DEFAULT_PWD);
+        }
+
+
+        if (!StringUtils.hasLength(employee.getIdCard())) {
+            throw new BusinessException("身份证号不能为空");
+        }
+
+        if (employee.getAge() == null) {
+            employee.setAge(18);
+        } else if (employee.getAge() < 0 || employee.getAge() > 120) {
+            throw new BusinessException("年龄值有误");
+        }
+
+
         employee.setState(Employee.STATE_NORMAL);
         if (!StringUtils.hasText(employee.getSex())) {
             employee.setSex(Employee.SEX_MEN);
         }
+
         if (!StringUtils.hasText(employee.getHeadImg())) {
             employee.setHeadImg(Employee.DEFAULT_HEAD_IMG);
         }
+
         employee.setCreateTime(new Date());
         employee.setIsAdmin(false);
+
         String nickName = JSONObject.parseObject(redisTemplateService.getCacheObject(token), Employee.class).getNickName();
         employee.setCreateby(nickName);
         super.save(employee);
+
     }
 
     @Override

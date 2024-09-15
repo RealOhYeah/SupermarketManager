@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 判断是否有权限
+ * 自定义注解判断是否有权限执行响应的操作
  */
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)

@@ -24,3 +24,7 @@ logging:
   level:
     cn.dingli.market.mapper: debug
 
+
+
+filePath: "/src/main/resources/static/files/"
+
