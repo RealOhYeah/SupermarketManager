@@ -13,7 +13,7 @@
             <el-col :span="3">
                 <el-input placeholder="商品名称" v-model="searchForm.goodsName"/>
             </el-col>
-            <el-col :span="16">
+            <el-col :span="16" style="width: 50%;">
                 <span>入库时间：</span>
                 <el-date-picker
                         value-format="yyyy-MM-dd"
