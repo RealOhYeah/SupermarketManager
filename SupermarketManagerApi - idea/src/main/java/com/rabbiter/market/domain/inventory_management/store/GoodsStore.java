@@ -11,8 +11,11 @@ import java.io.Serializable;
 public class GoodsStore implements Serializable {
 
 //    @TableField("goods_id")
-    @TableId(value = "goods_id", type = IdType.AUTO)
+    @TableId(value = "id", type = IdType.AUTO)
+    private Long id;
+    @TableField(value = "goods_id")
     private Long goodsId;
+
     @TableField("store_id")
     private Long storeId;
     @TableField("in_num")
@@ -31,6 +34,23 @@ public class GoodsStore implements Serializable {
         this.inNum = inNum;
         this.residueNum = residueNum;
         this.storeName = storeName;
+    }
+
+    public GoodsStore(Long id, Long goodsId, Long storeId, Long inNum, Long residueNum, String storeName) {
+        this.id = id;
+        this.goodsId = goodsId;
+        this.storeId = storeId;
+        this.inNum = inNum;
+        this.residueNum = residueNum;
+        this.storeName = storeName;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getGoodsId() {
