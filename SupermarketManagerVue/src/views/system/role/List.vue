@@ -89,7 +89,7 @@
                     >
                     <el-button
                         type="warning"
-                        @click="checkPermissons(scope.row.id)"
+                        @click="checkPer(scope.row.id)"
                         style="font-size: 18px"
                     >
                         <i
@@ -230,7 +230,7 @@
                         type="primary"
                         @click="submitDistributionFulForm"
                         style="font-size: 18px"
-                    >
+                    > 
                         <i
                             class="iconfont icon-r-add"
                             style="font-size: 18px"
@@ -384,16 +384,21 @@ export default {
         },
         /*职能分配*/
         /*授权按钮*/
-        checkPermissons(rid) {
+        checkPer(rid) {
             this.distributionFulForm.rid = rid;
             this.default_checked_mid = [];
             checkPermissons(rid).then((res) => {
                 res = res.data;
+                console.log("?????????????????????????")
+                console.log(res)
                 if (res.code == 200) {
                     this.fuloptions = res.data.menus;
                     this.default_checked_mid = res.data.menuIds.sort(
                         (x, y) => x - y
                     );
+                    console.log("1111111111111111111111111111")
+                    console.log(this.fuloptions)
+                 
                     console.log(typeof this.default_checked_mid);
                     console.log(this.default_checked_mid);
                 } else {
@@ -406,6 +411,10 @@ export default {
         submitDistributionFulForm() {
             var keys = this.$refs.tree.getCheckedKeys();
             var v = JSON.stringify(keys).replace("[", "").replace("]", "");
+
+            console.log("66666666666666666666666666666666666666666");
+            console.log(keys);            
+            console.log(v);
             this.distributionFulForm.menuIds = v;
             console.log(this.distributionFulForm.menuIds);
             saveRolePermissons(this.distributionFulForm).then((res) => {

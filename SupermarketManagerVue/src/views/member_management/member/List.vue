@@ -94,10 +94,11 @@
                             @click="editBtn(scope.row.id)"
                             style="font-size: 18px"
                         >
+
                             <i
                                 class="iconfont icon-r-edit"
                                 style="font-size: 18px"
-                            ></i>
+                            ></i>  
                             修改</el-button
                         >
                         <el-button
@@ -124,7 +125,7 @@
                     layout="total,sizes, prev, pager, next,jumper"
                     :total="searchForm.total"
                 >
-                </el-pagination>
+                </el-pagination>   
             </div>
         </div>
 
@@ -354,7 +355,7 @@ import {
     delMember,
     queryPageByQo,
     save,
-    update,
+    update, 
     queryMemberById,
 } from "@/api/member_management/member/memberApi";
 import {

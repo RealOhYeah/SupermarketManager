@@ -88,7 +88,8 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
         RolePermissonVo vo = new RolePermissonVo();
         /*角色所拥有的菜单id集合*/
         List<Long> menuIds = new ArrayList<>();
-        /*所有的菜单信息*/
+
+        /*用于封装所有的目录信息*/
         List<RolePermissonVo.RoleMenu> menus1 = new ArrayList<>();
         //步骤1：查询所有的菜单信息
         List<Menu> menus = menuService.findAll();
@@ -97,35 +98,54 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
         }
         //封装菜单信息
         for (Menu menu : menus) {
+
+            /*获取用于封装的类*/
             RolePermissonVo.RoleMenu roleMenu_catalogs = vo.getRoleMenu();
             roleMenu_catalogs.setValue(menu.getId());
             roleMenu_catalogs.setLabel(menu.getLabel());
+
             /*目录下的菜单*/
             List<RolePermissonVo.RoleMenu> children = new ArrayList<>();
-            //目录
+            //封装目录信息
             if (menu.getChildren() != null) {
                 for (Menu child : menu.getChildren()) {
                     //菜单
                     RolePermissonVo.RoleMenu roleMenu_menu = vo.getRoleMenu();
                     roleMenu_menu.setValue(child.getId());
                     roleMenu_menu.setLabel(child.getLabel());
+
+                    /*菜单下的按钮*/
                     List<RolePermissonVo.RoleMenu> children1 = new ArrayList<>();
+
+                    //封装按钮信息
                     if (child.getChildren() != null) {
                         for (Menu childChild : child.getChildren()) {
                             //按钮
                             RolePermissonVo.RoleMenu roleMenu_button = vo.getRoleMenu();
                             roleMenu_button.setValue(childChild.getId());
                             roleMenu_button.setLabel(childChild.getLabel());
+
+                            /*将按钮加入对应菜单*/
                             children1.add(roleMenu_button);
                         }
+
+                        /*将每一个菜单信息进行封装*/
                         roleMenu_menu.setChildren(children1);
                     }
+
+                    /*将菜单加入对应目录*/
                     children.add(roleMenu_menu);
                 }
+
+                /*将每一个目录信息进行封装*/
                 roleMenu_catalogs.setChildren(children);
             }
+
+            /*将目录信息汇总*/
             menus1.add(roleMenu_catalogs);
         }
+
+        /*最后封装*/
         vo.setMenus(menus1);
 
         //步骤2：是否是系统管理员
@@ -148,8 +168,8 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
 
                     }
                 }
-
             }
+
             vo.setMenuIds(menuIds);
         } else {
             //非系统管理员
@@ -198,8 +218,11 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
                         totalIds.add(menu.getId());
                     }
                 }
-                //清除关系
+
+                //清除之前的绑定关系
                 roleMapper.clearRecordsByRid(rid);
+
+                //保存新的关系
                 List<Map<String, Object>> list = new ArrayList<>();
                 for (Long id : totalIds) {
                     Map<String, Object> map = new HashMap<>();
@@ -208,6 +231,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
                     list.add(map);
                 }
                 roleMapper.saveRolePermissons(list);
+
             }
         }
 

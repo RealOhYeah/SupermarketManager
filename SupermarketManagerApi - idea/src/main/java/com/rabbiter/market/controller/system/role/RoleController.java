@@ -94,7 +94,7 @@ public class RoleController {
     }
 
     /**
-     * 保存角色-菜单的关系
+     * 保存/修改角色-菜单的关系
      *
      * @param rid
      * @param menuIds
@@ -122,6 +122,7 @@ public class RoleController {
         List<Long> list = roleService.queryRoleIdsByEid(eid);
         return JsonResult.success(list);
     }
+
     @HasPermisson("personnel_management:employee:queryRoleIdsByEid")
     @PostMapping("/saveRoleEmp")
     public JsonResult saveRoleEmp(Long eid, Long[] empRoleIds, HttpServletRequest request) {

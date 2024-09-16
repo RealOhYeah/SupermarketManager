@@ -5,7 +5,7 @@
             <el-breadcrumb-item>库存管理 </el-breadcrumb-item>
             <el-breadcrumb-item>库存统计</el-breadcrumb-item> </el-breadcrumb
         ><br />
-
+        
         <el-row>
             <el-col :span="8">
                 <el-input placeholder="仓库名称" v-model="searchForm.name" />
@@ -83,7 +83,7 @@
         <el-dialog
             title="仓库存储明细"
             :visible.sync="detailStoreVisible"
-            width="95%"
+            width="70%"
             height="100%"
         >
             <el-row>

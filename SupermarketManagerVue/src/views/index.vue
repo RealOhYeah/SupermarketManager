@@ -7,10 +7,7 @@
 
                         <i style="  font-size: 32px" class="iconfont icon-fuwuchaoshi">
                             <b style="font-size: 26px"> 超市管理系统</b>
-                        </i>
-
-                        
-
+                        </i> 
                     </router-link>
 
                 </el-col>
@@ -69,12 +66,13 @@
 
                         <el-menu-item-group>
 
+                            <!-- 下方c.purl点击后进行地址跳转 -->
                             <el-menu-item v-for="c in item.children" :key="c.id" :index="c.purl">
                                 <i :class="c.icon" style="font-size: 25px"> </i>
                                 <b style="font-size: 17px;font-family: 'SimSun'"> {{ c.label }}</b>
                             </el-menu-item>
 
-                        </el-menu-item-group>
+                        </el-menu-item-group> 
 
                     </el-submenu>
 
@@ -84,6 +82,7 @@
                 <router-view />
             </el-main>
         </el-container>
+
     </el-container>
 </template>
 <script>
@@ -118,10 +117,16 @@ export default {
             this.loginName = loginEmp().nickName;
             ajaxGet("/empMenu", {}).then((res) => {
                 res = res.data;
+                console.log("33333333333333333333333333")
+                console.log(res)
+                console.log(res.data)
+
                 if (res.code == 200) {
                     this.menu_catalogs = res.data;
                 }
+
             });
+ 
         },
         /*个人资料*/
         informationBtn() {

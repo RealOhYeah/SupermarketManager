@@ -3,11 +3,12 @@
         <el-breadcrumb separator="/">
             <el-breadcrumb-item>首页</el-breadcrumb-item>
             <el-breadcrumb-item>系统管理</el-breadcrumb-item>
-            <el-breadcrumb-item>菜单管理</el-breadcrumb-item> </el-breadcrumb
+            <el-breadcrumb-item>菜单管理</el-breadcrumb-item> 
+            </el-breadcrumb
         ><br />
         <el-row>
             <el-col :span="8" style="text-align: left; padding-right: 10px">
-                <el-input placeholder="菜单名称" v-model="searchForm.name" />
+                <el-input placeholder="目录名称" v-model="searchForm.name" />
             </el-col>
         </el-row>
         <br />
@@ -49,12 +50,12 @@
                     prop="flag"
                     :show-overflow-tooltip="true"
                     label="标识符"
-                >
-                    <template v-slot="scope">
-                        <el-tag type="info">{{
+                > 
+                    <template  v-slot="scope">
+                        <el-tag type="info">{{ 
                             scope.row.flag ? scope.row.flag : "暂定"
                         }}</el-tag>
-                    </template>
+                    </template> 
                 </el-table-column>
                 <el-table-column prop="type" label="类型">
                     <template v-slot="scope">
@@ -102,7 +103,6 @@
                 <el-table-column prop="state" label="状态">
                     <template v-slot="scope">
                         <el-tag
-                            
                             type="success"
                             v-if="scope.row.state == 0"
                             >正常</el-tag
@@ -152,7 +152,7 @@ export default {
                     this.tableData = res.data.records;
                     this.searchForm.total = res.data.total;
                     this.searchForm.pageSize = res.data.size;
-                    this.searchForm.currentPage = res.data.current;
+                    this.searchForm.currentPage = res.data.current; 
                 } else {
                     popup(res.msg, "error");
                 }
