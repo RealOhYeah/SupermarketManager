@@ -73,7 +73,7 @@
                 </el-table-column>
                 <el-table-column prop="state" label="状态">
                     <template v-slot="scope">
-                        <el-tag size="mini" type="success" v-if="scope.row.state == '0'">上架</el-tag>
+                        <el-tag size="mini" type="primary" v-if="scope.row.state == '0'">上架</el-tag>
                         <el-tag size="mini" type="danger" v-else>下架</el-tag>
                     </template>
                 </el-table-column>

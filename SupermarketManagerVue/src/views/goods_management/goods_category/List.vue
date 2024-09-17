@@ -48,10 +48,18 @@
                     <template v-slot="scope">
                         <el-button type="success" @click="editbtn(scope.row)" style="font-size: 18px">
                             <i class="iconfont icon-r-edit" style="font-size: 18px"></i>
-                            修改</el-button>
-                        <el-button type="danger" @click="forbidden(scope.row.id)" style="font-size: 18px">
+                            修改</el-button>                                                    
+                        <el-button v-if="scope.row.state == '0'" type="danger" @click="forbidden(scope.row.id)"
+                            style="font-size: 18px">
                             <i class="iconfont icon-r-no" style="font-size: 18px"></i>
                             停用</el-button>
+
+                        <el-button v-else type="primary" @click="enable(scope.row)" style="font-size: 18px">
+                            <i class="iconfont icon-r-no" style="font-size: 18px"></i>
+                            启用</el-button>
+
+
+
                     </template>
                 </el-table-column>
             </el-table>
@@ -91,10 +99,10 @@
                 <el-form-item label="描述：">
                     <el-input type="textarea" v-model="editForm.info"></el-input>
                 </el-form-item>
-                <el-form-item class="adjust" style="display: flex;flex-direction: row;justify-content: space-between;"  
+                <el-form-item class="adjust" style="display: flex;flex-direction: row;justify-content: space-between;"
                     prop="state">
                     <span>状态：</span>
-                    <el-select  v-model="editForm.state" clearable @change="$forceUpdate()" placeholder="请选择状态">
+                    <el-select v-model="editForm.state" clearable @change="$forceUpdate()" placeholder="请选择状态">
                         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
                         </el-option>
                     </el-select>
@@ -208,10 +216,31 @@ export default {
             this.newVisable = false;
             this.$refs["newForm"].resetFields();
         },
+        enable(row){
+            this.editForm = { ...row };
+            this.editForm.state = "0"; //启用
+            // this.dialogVisible = true;
+            update(this.editForm).then((res) => {
+                res = res.data;
+                if (res.code == 200) {
+                    popup("操作成功");
+                    this.editForm = {};
+                    this.dialogVisible = false;
+                    this.init();
+                } else {
+                    popup(res.msg, "error");
+                }
+            })
+
+
+        }, 
         /*修改信息业务*/
         editbtn(row) {
+
             this.editForm = { ...row };
+            //下方的表单是为了重置过程中进行操作
             this.oldEditForm = { ...row };
+
             this.dialogVisible = true;
         },
         submitEditForm(formName) {
