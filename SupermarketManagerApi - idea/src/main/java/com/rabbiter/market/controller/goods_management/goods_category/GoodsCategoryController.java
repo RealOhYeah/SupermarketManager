@@ -23,7 +23,12 @@ public class GoodsCategoryController {
     @Autowired
     private IGoodsCategoryService goodsCategoryService;
 
-    /*保存信息接口*/
+
+    /**
+     * 创建商品分类接口
+     * @param category
+     * @return
+     */
     @HasPermisson("goods_management:goods_category:save")
     @PostMapping("/save")
     public JsonResult saveGoodsCategory(GoodsCategory category){
@@ -31,7 +36,11 @@ public class GoodsCategoryController {
         return JsonResult.success();
     }
 
-    /*修改接口*/
+    /**
+     * 修改商品分类
+     * @param category
+     * @return
+     */
     @HasPermisson("goods_management:goods_category:update")
     @PostMapping("/update")
     public JsonResult updateGoodsCategory(GoodsCategory category){

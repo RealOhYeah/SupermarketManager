@@ -3,11 +3,11 @@
         <el-header style=" background-color: rgb(52, 65, 86); height: 80px">
             <el-row>
                 <el-col :span="12" style="margin-top: 20px">
-                    <router-link style="text-decoration: none;color: #fff;" to="/home">
 
+                    <router-link  style="text-decoration: none;color: #fff;" to="/home"> 
                         <i style="  font-size: 32px" class="iconfont icon-fuwuchaoshi">
                             <b style="font-size: 26px"> 超市管理系统</b>
-                        </i> 
+                        </i>
                     </router-link>
 
                 </el-col>
@@ -72,7 +72,7 @@
                                 <b style="font-size: 17px;font-family: 'SimSun'"> {{ c.label }}</b>
                             </el-menu-item>
 
-                        </el-menu-item-group> 
+                        </el-menu-item-group>
 
                     </el-submenu>
 
@@ -112,6 +112,9 @@ export default {
         };
     },
     methods: {
+        refresh() {
+            location.reload();
+        },
         init() {
             this.isAdmin = loginEmp().isAdmin;
             this.loginName = loginEmp().nickName;
@@ -188,7 +191,9 @@ export default {
         },
     },
     mounted() {
+        
         this.init();
+
     },
 };
 </script>

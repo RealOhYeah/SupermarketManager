@@ -33,7 +33,7 @@ public class GoodsCategoryServiceImpl extends ServiceImpl<GoodsCategoryMapper, G
                 .eq("name", goodsCategory.getName())
                 .eq("state", goodsCategory.getState());
         GoodsCategory category = super.getOne(queryWrapper);
-        if (GoodsCategory.STATE_BAN.equals(goodsCategory.getState())) {
+        if (GoodsCategory.STATE_NORMAL.equals(goodsCategory.getState())) {
             //查看是否有上架商品正在使用
             QueryWrapper<Goods> wrapper = new QueryWrapper<Goods>().eq("category_id", goodsCategory.getId()).eq("state", Goods.STATE_UP);
             List<Goods> list = goodsService.list(wrapper);
@@ -86,6 +86,10 @@ public class GoodsCategoryServiceImpl extends ServiceImpl<GoodsCategoryMapper, G
         return super.page(page, wrapper);
     }
 
+    /**
+     * 创建商品分类
+     * @param category
+     */
     @Override
     public void saveGoodsCategory(GoodsCategory category) {
         //判断数据库是否保存过这个分类信息
