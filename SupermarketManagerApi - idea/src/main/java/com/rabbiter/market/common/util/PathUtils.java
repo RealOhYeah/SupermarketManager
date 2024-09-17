@@ -24,27 +24,31 @@ import java.util.UUID;
 
 public class PathUtils {
 
-    @Value("${filePath}")
-    private static String filePath;
+//    @Value("${filePath}")
+    private static final String filePath = "/src/main/resources/static/files/";
 
 
     public static void main(String[] args) throws UnsupportedEncodingException {
 
         //sun.misc.Launcher$AppClassLoader@14dad5dc
-        System.out.println(PathUtils.class.getClassLoader());
+//        System.out.println(PathUtils.class.getClassLoader());
+//
+//        System.out.println("!!!!!");
+//        System.out.println(PathUtils.class.getClassLoader().getResource(""));
+//        System.out.println(URLDecoder.decode(PathUtils.class.getClassLoader().getResource("").toString()));
+//
+//
+//        System.out.println("%%%%%%%");
+//        System.out.println(PathUtils.class.getClassLoader().getResource("").getPath());
+//        System.out.println(URLDecoder.decode(PathUtils.class.getClassLoader().getResource("").getPath()));
+//
+//        System.out.println("@@@@@");
+//        String prePath = URLDecoder.decode(PathUtils.class.getClassLoader().getResource("").getPath(),"utf-8").replace("/target/classes", "");
+//        System.out.println(prePath);
 
-        System.out.println("!!!!!");
-        System.out.println(PathUtils.class.getClassLoader().getResource(""));
-        System.out.println(URLDecoder.decode(PathUtils.class.getClassLoader().getResource("").toString()));
 
+//        System.out.println(filePath);
 
-        System.out.println("%%%%%%%");
-        System.out.println(PathUtils.class.getClassLoader().getResource("").getPath());
-        System.out.println(URLDecoder.decode(PathUtils.class.getClassLoader().getResource("").getPath()));
-
-        System.out.println("@@@@@");
-        String prePath = URLDecoder.decode(PathUtils.class.getClassLoader().getResource("").getPath(),"utf-8").replace("/target/classes", "");
-        System.out.println(prePath);
 
     }
 
@@ -129,9 +133,12 @@ public class PathUtils {
         File destFile = null;
 
         try {
-            // 转换配置文件中的路径为File对象
-            Path path = Paths.get(PathUtils.getClassLoadRootPath() + filePath);
-            File dir = path.toFile();
+
+            String s = PathUtils.getClassLoadRootPath() + filePath;
+            System.out.println(s);
+
+            // 创建文件对象
+            File dir = new File(s);
 
             // 如果目录不存在，则创建目录
             if (!dir.exists()) {
@@ -143,7 +150,7 @@ public class PathUtils {
 
             // 加上时间戳生成新文件名
             String newFileName = System.currentTimeMillis() + "_" + multipartFile.getOriginalFilename();
-            res = "/" + newFileName; // 根据实际情况调整返回的路径格式
+            res = "/files/" + newFileName; // 根据实际情况调整返回的路径格式
 
             // 构建目标文件对象
             destFile = new File(dir, newFileName);
@@ -164,7 +171,7 @@ public class PathUtils {
      * 最开始的处理方式
      * @return
      */
- /*   public static String upload(MultipartFile multipartFile) {
+   /* public static String upload(MultipartFile multipartFile) {
         String res = null;  // 返回网络路径
         try {
             String staticDir = PathUtils.getClassLoadRootPath() + filePath;
@@ -196,6 +203,5 @@ public class PathUtils {
             e.printStackTrace();
         }
         return res;
-    }
-*/
+    }*/
 }
