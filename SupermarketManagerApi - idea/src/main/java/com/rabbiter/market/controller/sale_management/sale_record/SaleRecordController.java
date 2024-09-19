@@ -1,6 +1,7 @@
 package com.rabbiter.market.controller.sale_management.sale_record;
 
 import com.rabbiter.market.common.sercurity.annotation.HasPermisson;
+import com.rabbiter.market.common.snowflake.SnowFlake;
 import com.rabbiter.market.common.web.response.JsonResult;
 import com.rabbiter.market.domain.sale_management.sale_records.SaleRecords;
 import com.rabbiter.market.qo.sale_records.QuerySaleRecords;
@@ -29,7 +30,35 @@ public class SaleRecordController {
      */
     @GetMapping("/getCn")
     public JsonResult getCn(){
+
+        //下方是通过Mybatis-plus的IdWorker生成订单id
         return JsonResult.success(IdWorker.getIdStr());
+
+        /*
+        *
+            {
+              "code": 200,
+              "msg": "操作成功",
+              "data": "1836675535584833537"
+            }
+        * */
+
+
+        //这里是通过自己实现的雪花算法生成的订单id
+//        SnowFlake idWorker = new SnowFlake(0, 0);
+//        long id = idWorker.nextId();
+//        return JsonResult.success(id);
+
+        /*
+        *
+        {
+          "code": 200,
+          "msg": "操作成功",
+          "data": 822606703009726464
+         }
+        */
+
+
     }
 
     /**

@@ -23,7 +23,6 @@ public class BaseWebConfig implements WebMvcConfigurer{
      * 拦截器可能没使用的原因：因为拦截器配置好之后，会导致配置全局Cors失效
      * @param registry
      */
-
     //注册拦截器
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -56,6 +55,8 @@ public class BaseWebConfig implements WebMvcConfigurer{
             }
         };
     }
+
+
 
     /**
      * 静态资源映射
