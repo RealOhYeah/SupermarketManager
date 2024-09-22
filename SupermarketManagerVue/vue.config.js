@@ -14,7 +14,18 @@ const timeStamp = new Date().getTime()
 module.exports={
   devServer:{
     host:"localhost",
-    port: 9292
+    // host:"192.168.88.132", 
+    port: 9292,
+    proxy: {
+      "/api": {
+        target: "http://192.168.88.132:9292",
+        // target: "http://localhost:9292",
+        pathRewrite: {
+          "^/api": "/",
+        },
+        // ws:true
+      },
+    },
   },
   // 打包后的文件输出路径
   outputDir: 'dist',

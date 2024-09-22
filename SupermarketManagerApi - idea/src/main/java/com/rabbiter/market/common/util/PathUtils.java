@@ -24,31 +24,17 @@ import java.util.UUID;
 
 public class PathUtils {
 
-//    @Value("${filePath}")
-    private static final String filePath = "/src/main/resources/static/files/";
+      //开发过程的路径
+//    private static final String filePath = "/src/main/resources/static/files/";
+
+    //在部署项目的路径是：classes/static/files/
+//    private static final String filePath = "classes/static/files/";
+
+    //正常测试的路径
+       private static final String filePath = "/classes/static/files/";
 
 
     public static void main(String[] args) throws UnsupportedEncodingException {
-
-        //sun.misc.Launcher$AppClassLoader@14dad5dc
-//        System.out.println(PathUtils.class.getClassLoader());
-//
-//        System.out.println("!!!!!");
-//        System.out.println(PathUtils.class.getClassLoader().getResource(""));
-//        System.out.println(URLDecoder.decode(PathUtils.class.getClassLoader().getResource("").toString()));
-//
-//
-//        System.out.println("%%%%%%%");
-//        System.out.println(PathUtils.class.getClassLoader().getResource("").getPath());
-//        System.out.println(URLDecoder.decode(PathUtils.class.getClassLoader().getResource("").getPath()));
-//
-//        System.out.println("@@@@@");
-//        String prePath = URLDecoder.decode(PathUtils.class.getClassLoader().getResource("").getPath(),"utf-8").replace("/target/classes", "");
-//        System.out.println(prePath);
-
-
-//        System.out.println(filePath);
-
 
     }
 
@@ -113,6 +99,17 @@ public class PathUtils {
             // 对于Windows系统，通常不需要在这里做额外的处理，因为getResource("")不会返回驱动器号路径
 
             path = filePath;
+            System.out.println("!!!!!!!");
+            System.out.println(path);
+
+            if (path.endsWith("classes!/")){
+                path = path.replace("SupermarketManagerApi-1.0.0.jar!/BOOT-INF/classes!/", "");
+            }
+
+            System.out.println("1111111111111");
+            System.out.println(path);
+
+
         } catch (UnsupportedEncodingException e) {
             // 在Java 7及以上版本中，UTF-8总是受支持的，但保留这个捕获块以增加代码的健壮性
             // 改为抛出更具体的运行时异常，以便调用者可以更容易地处理或记录错误
