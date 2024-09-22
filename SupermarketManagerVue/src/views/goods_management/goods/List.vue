@@ -135,7 +135,9 @@
             <el-form :model="newForm" :rules="rules" ref="newForm" label-width="100px" class="demo-ruleForm">
                 <el-form-item label="商品图：">
                     <!--                    action="http://localhost:9291/goods_management/goods/uploadImg"-->
-                    <el-upload class="avatar-uploader" action="http://localhost:9291/goods_management/goods/uploadImg"
+                    <!-- <el-upload class="avatar-uploader" action="http://localhost:9291/goods_management/goods/uploadImg" -->
+                    <!-- <el-upload class="avatar-uploader" action="http://192.168.88.132:9291/goods_management/goods/uploadImg" -->
+                    <el-upload class="avatar-uploader" action= "BaseApi + /goods_management/goods/uploadImg"
                         :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
                         <img v-if="imageUrl" :src="BaseApi + imageUrl" class="avatar" />
                         <i v-else class="el-icon-plus avatar-uploader-icon"></i>

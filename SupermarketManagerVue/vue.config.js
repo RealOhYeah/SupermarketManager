@@ -18,8 +18,8 @@ module.exports={
     port: 9292,
     proxy: {
       "/api": {
-        target: "http://192.168.88.132:9292",
-        // target: "http://localhost:9292",
+        // target: "http://192.168.88.132:9292",
+        target: "http://localhost:9292",
         pathRewrite: {
           "^/api": "/",
         },

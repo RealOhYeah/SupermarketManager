@@ -30,7 +30,7 @@ public class PathUtils {
     //在部署项目的路径是：classes/static/files/
 //    private static final String filePath = "classes/static/files/";
 
-    //正常测试的路径
+    //正常测试部署项目的路径
        private static final String filePath = "/classes/static/files/";
 
 
