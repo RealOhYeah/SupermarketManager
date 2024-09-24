@@ -1,0 +1,60 @@
+version: "3.8"
+
+services:
+  redis: # 服务名称
+    image: redis # redis镜像版本
+    container_name: redis # 容器名称
+    ports:
+      - 6379:6379 # 指定宿主机端口与容器端口映射关系，宿主机：容器
+    volumes:
+      - ./redis/conf/redis.conf:/etc/redis/redis.conf # 映射配置文件目录，宿主机:容器
+      - ./redis/data:/data # 映射数据目录，宿主机:容器
+    privileged: true # 获取宿主机root权限
+    command: ["redis-server","/etc/redis/redis.conf"] # 指定配置文件启动redis-server进程 
+    networks:
+      - supermarket-net
+  mysql:
+    image: mysql
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      TZ: Asia/Shanghai
+      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_DATABASE: supermarket_manager
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/conf/:/etc/mysql/conf.d/
+      - ./mysql/init/:/docker-entrypoint-initdb.d/
+    networks:
+      - supermarket-net
+    restart: on-failure
+  supermarket:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: supermarket
+    ports:
+      - "9291:9291"
+    networks:
+      - supermarket-net
+    depends_on:
+      - mysql
+      - redis
+    volumes:       
+      - ./supermarket/classes/static/files:/supermarket/classes/static/files 
+  nginx:
+    image: nginx
+    container_name: nginx
+    ports:
+      - "9292:9292" 
+    volumes:
+      - ./nginx/conf/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/html:/usr/share/nginx/html
+    depends_on:
+      - supermarket
+    networks:
+      - supermarket-net
+networks:
+  supermarket-net:
+    name: supermarket

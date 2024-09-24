@@ -70,7 +70,17 @@ public class BaseWebConfig implements WebMvcConfigurer{
         //在部署项目的路径是：classes/static/files/
 //        String winPath = PathUtils.getClassLoadRootPath() + "classes/static/files/";
 
-        String winPath = PathUtils.getClassLoadRootPath() + "/classes/static/files/";
+
+        //在dockerCompose部署项目的路径是：supermarket/classes/static/files/
+        String winPath = PathUtils.getClassLoadRootPath() + "supermarket/classes/static/files/";
+
+
+
+        //绝对路径，在部署项目时，需要修改
+//        String winPath = PathUtils.getClassLoadRootPath() + "/opt/test/classes/static/files/";
+
+        //正常测试部署项目的路径
+//        String winPath = PathUtils.getClassLoadRootPath() + "/classes/static/files/";
 
 
         //第一个方法设置访问路径前缀，第二个方法设置资源路径

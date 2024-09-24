@@ -30,20 +30,26 @@ public class PathUtils {
     //在部署项目的路径是：classes/static/files/
 //    private static final String filePath = "classes/static/files/";
 
+
+
+    //在dockerCompose部署项目的路径是：supermarket/classes/static/files/
+    private static final String filePath = "supermarket/classes/static/files/";
+
+
+    //绝对路径
+//    private static final String filePath = "/opt/test/classes/static/files/";
+
+
     //正常测试部署项目的路径
-       private static final String filePath = "/classes/static/files/";
+//       private static final String filePath = "/classes/static/files/";
 
 
-    public static void main(String[] args) throws UnsupportedEncodingException {
-
-    }
 
     /**
      * 最开始的处理方式
      * @return
      */
-/*
-    public static String getClassLoadRootPath() {
+/*    public static String getClassLoadRootPath() {
         String path = "";
         try {
             String prePath = URLDecoder.decode(PathUtils.class.getClassLoader().getResource("").getPath(),"utf-8").replace("/target/classes", "");
@@ -64,8 +70,7 @@ public class PathUtils {
             e.printStackTrace();
         }
         return path;
-    }
-*/
+    }*/
 
     /**
      * 改进之后的路径获取方式
@@ -100,14 +105,20 @@ public class PathUtils {
 
             path = filePath;
             System.out.println("!!!!!!!");
-            System.out.println(path);
+            System.out.println("filePath路径是：" + filePath);
+            System.out.println("path路径是:" + path);
 
             if (path.endsWith("classes!/")){
-                path = path.replace("SupermarketManagerApi-1.0.0.jar!/BOOT-INF/classes!/", "");
+                path = path.replace("/SupermarketManagerApi-1.0.0.jar!/BOOT-INF/classes!/", "");
             }
 
             System.out.println("1111111111111");
-            System.out.println(path);
+            System.out.println("path路径是:" + path);
+
+
+            System.out.println("下方是获取系统的绝对路径：");
+            String absolutePath = System.getProperty("user.dir");
+            System.out.println(absolutePath);
 
 
         } catch (UnsupportedEncodingException e) {
@@ -121,15 +132,16 @@ public class PathUtils {
 
 
     /**
-     * 改进之后的文件上传方法
+     * 改进之后的文件上传方法(此方法在Linux中的DockerCompose中会出现报错问题，但是在本机中没有问题。应该是底层实现有不兼容的地方)
      * @param multipartFile
      * @return
      */
-    public static String upload(MultipartFile multipartFile) {
+/*
+    public static String upload(MultipartFile multipartFile) throws IOException {
         String res = null;
         File destFile = null;
 
-        try {
+//        try {
 
             String s = PathUtils.getClassLoadRootPath() + filePath;
             System.out.println(s);
@@ -149,28 +161,37 @@ public class PathUtils {
             String newFileName = System.currentTimeMillis() + "_" + multipartFile.getOriginalFilename();
             res = "/files/" + newFileName; // 根据实际情况调整返回的路径格式
 
+            System.out.println("res路径是:" + res);
+
             // 构建目标文件对象
             destFile = new File(dir, newFileName);
+
+            System.out.println("destFile路径是:" + destFile);
 
             // 直接将MultipartFile写入目标文件
             multipartFile.transferTo(destFile);
 
-        } catch (IOException e) {
-            // 记录或抛出异常
-            throw new RuntimeException("文件上传失败：" + e.getMessage(), e);
-        }
+//        } catch (IOException e) {
+//            // 记录或抛出异常
+//            throw new RuntimeException("文件上传失败：" + e.getMessage(), e);
+//        }
 
         return res;
     }
+*/
 
 
     /**
-     * 最开始的处理方式
+     * 最开始的处理方式(此方法在Linux中的DockerCompose中或在本机中都没有问题
      * @return
      */
-   /* public static String upload(MultipartFile multipartFile) {
+    public static String upload(MultipartFile multipartFile) {
         String res = null;  // 返回网络路径
         try {
+
+            // 最开始在开发环境下进行测试的路径
+//            String staticDir = PathUtils.getClassLoadRootPath() + "/src/main/resources/static/files/";
+
             String staticDir = PathUtils.getClassLoadRootPath() + filePath;
 
             // 创建文件对象
@@ -200,5 +221,7 @@ public class PathUtils {
             e.printStackTrace();
         }
         return res;
-    }*/
+    }
+
+
 }

@@ -1,3 +1,11 @@
+<!--
+ * @Author: Oh...Yeah!!! 614988210@qq.com
+ * @Date: 2024-09-02 21:47:56
+ * @LastEditors: Oh...Yeah!!! 614988210@qq.com
+ * @LastEditTime: 2024-09-24 18:19:49
+ * @FilePath: \SupermarketManagerVue\src\views\goods_management\goods\List.vue
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
 <template>
     <div>
         <el-breadcrumb separator="/">
@@ -136,9 +144,10 @@
                 <el-form-item label="商品图：">
                     <!--                    action="http://localhost:9291/goods_management/goods/uploadImg"-->
                     <!-- <el-upload class="avatar-uploader" action="http://localhost:9291/goods_management/goods/uploadImg" -->
-                    <!-- <el-upload class="avatar-uploader" action="http://192.168.88.132:9291/goods_management/goods/uploadImg" -->
-                    <el-upload class="avatar-uploader" action= "BaseApi + /goods_management/goods/uploadImg"
-                        :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+                    <!-- <el-upload class="avatar-uploader" action="BaseApi + /goods_management/goods/uploadImg"  -->
+                    <el-upload class="avatar-uploader"
+                        action="http://192.168.88.132:9291/goods_management/goods/uploadImg" :show-file-list="false"
+                        :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
                         <img v-if="imageUrl" :src="BaseApi + imageUrl" class="avatar" />
                         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                     </el-upload>

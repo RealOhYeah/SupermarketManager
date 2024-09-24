@@ -1,0 +1,19 @@
+version: "3"
+services:
+  mysql:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    hostname: mysql
+    container_name: supermarketmanager
+    image: mysql
+    volumes:
+      - ./mysql/db:/var/lib/mysql
+      - ./mysql/conf/:/etc/mysql/conf.d/
+      - ./mysql/init/supermarketmanager.sql:/docker-entrypoint-initdb.d/supermarketmanager.sql
+    environment:
+      - MYSQL_ROOT_PASSWORD=123
+      - MYSQL_DATABASE=supermarketmanager
+    ports: 
+      - 3306:3306
+    restart: on-failure

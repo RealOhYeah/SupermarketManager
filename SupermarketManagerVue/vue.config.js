@@ -13,13 +13,13 @@ const timeStamp = new Date().getTime()
 
 module.exports={
   devServer:{
-    host:"localhost",
-    // host:"192.168.88.132", 
+    // host:"localhost",
+    host:"192.168.88.132", 
     port: 9292,
     proxy: {
       "/api": {
-        // target: "http://192.168.88.132:9292",
-        target: "http://localhost:9292",
+        target: "http://192.168.88.132:9291",
+        // target: "http://localhost:9291",
         pathRewrite: {
           "^/api": "/",
         },
