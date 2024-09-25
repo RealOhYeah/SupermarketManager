@@ -2,7 +2,7 @@
  * @Author: Oh...Yeah!!! 614988210@qq.com
  * @Date: 2024-09-02 21:47:56
  * @LastEditors: Oh...Yeah!!! 614988210@qq.com
- * @LastEditTime: 2024-09-25 21:41:14
+ * @LastEditTime: 2024-09-25 21:53:09
  * @FilePath: \SupermarketManagerVue\src\views\goods_management\goods\List.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -221,13 +221,17 @@
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
-                        <el-form-item label="仓库：" prop="storeId">
-                            <el-select v-model="returnForm.storeId" placeholder="请选择仓库" filterable clearable>
-                                <el-option v-for="item in options_store" :key="item.id" :label="item.name"
-                                    :value="item.id">
-                                </el-option>
-                            </el-select>
-                        </el-form-item>
+                        <i class="returnMessage">
+
+                            <el-form-item label="仓库：" prop="storeId">
+                                <el-select v-model="returnForm.storeId" placeholder="请选择仓库" filterable clearable>
+                                    <el-option v-for="item in options_store" :key="item.id" :label="item.name"
+                                        :value="item.id">
+                                    </el-option>
+                                </el-select>
+                            </el-form-item>
+
+                        </i>
                     </el-col>
                 </el-row>
                 <el-row>
@@ -251,12 +255,16 @@
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
-                        <el-form-item label="类型：" prop="state">
-                            <el-select v-model="returnForm.state" @change="$forceUpdate" placeholder="请选择类型" clearable>
-                                <el-option label="过期" value="1"></el-option>
-                                <el-option label="入库" value="0"></el-option>
-                            </el-select>
-                        </el-form-item>
+                        <i class="returnMessage">
+
+                            <el-form-item label="类型：" prop="state">
+                                <el-select v-model="returnForm.state" @change="$forceUpdate" placeholder="请选择类型"
+                                    clearable>
+                                    <el-option label="过期" value="1"></el-option>
+                                    <el-option label="入库" value="0"></el-option>
+                                </el-select>
+                            </el-form-item>
+                        </i>
                     </el-col>
                 </el-row>
                 <el-row>
@@ -266,11 +274,14 @@
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
-                        <el-form-item label="日期：" prop="createTime">
-                            <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="returnForm.createTime"
-                                type="date" placeholder="退还日期">
-                            </el-date-picker>
-                        </el-form-item>
+                        <i class="returnMessage">
+
+                            <el-form-item label="日期：" prop="createTime">
+                                <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="returnForm.createTime"
+                                    type="date" placeholder="退还日期">
+                                </el-date-picker>
+                            </el-form-item>
+                        </i>
                     </el-col>
                 </el-row>
                 <el-form-item style="width: 80%">
@@ -624,10 +635,10 @@ export default {
 };
 </script>
 <style>
-/* 
-.el-form-item__content{
+
+.returnMessage .el-form-item__content{
     width: 230px !important;  
-} */
+}
 
 .searchForm {
     height: 134px;
