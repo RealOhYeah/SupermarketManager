@@ -73,7 +73,7 @@
         </div>
 
         <!--创建弹出框-->
-        <el-dialog title="创建商品分类" :visible.sync="newVisable" width="50%">
+        <el-dialog title="创建商品分类" :visible.sync="newVisable" width="30%">
             <el-form :model="newForm" :rules="rules" ref="newForm" label-width="100px" class="demo-ruleForm">
                 <el-form-item label="名称：" prop="name">
                     <el-input v-model="newForm.name"></el-input>

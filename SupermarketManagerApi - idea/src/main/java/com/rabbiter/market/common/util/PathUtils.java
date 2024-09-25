@@ -25,15 +25,14 @@ import java.util.UUID;
 public class PathUtils {
 
       //开发过程的路径
-//    private static final String filePath = "/src/main/resources/static/files/";
+    private static final String filePath = "/src/main/resources/static/files/";
 
     //在部署项目的路径是：classes/static/files/
 //    private static final String filePath = "classes/static/files/";
 
 
-
     //在dockerCompose部署项目的路径是：supermarket/classes/static/files/
-    private static final String filePath = "supermarket/classes/static/files/";
+//    private static final String filePath = "supermarket/classes/static/files/";
 
 
     //绝对路径
@@ -115,10 +114,20 @@ public class PathUtils {
             System.out.println("1111111111111");
             System.out.println("path路径是:" + path);
 
+            if (path.startsWith("/")){
+                System.out.println("下方是获取系统的绝对路径：");
+                String absolutePath = System.getProperty("user.dir");
+                System.out.println(absolutePath);
+                path = absolutePath;
 
-            System.out.println("下方是获取系统的绝对路径：");
-            String absolutePath = System.getProperty("user.dir");
-            System.out.println(absolutePath);
+                //此处是为了更换“\”为“/”，主要为了美观
+                path = path.replace("\\", "/");
+
+
+            }
+
+            System.out.println("22222222");
+            System.out.println("path路径是:" + path);
 
 
         } catch (UnsupportedEncodingException e) {
@@ -132,7 +141,7 @@ public class PathUtils {
 
 
     /**
-     * 改进之后的文件上传方法(此方法在Linux中的DockerCompose中会出现报错问题，但是在本机中没有问题。应该是底层实现有不兼容的地方)
+     * 改进之后的文件上传方法(transferTo方法在Linux中的DockerCompose中会出现报错问题，但是在本机中没有问题。应该是底层实现有不兼容的地方)
      * @param multipartFile
      * @return
      */

@@ -18,7 +18,13 @@ public class CacheDataJob {
     @Autowired
     private IGoodsCategoryService goodsCategoryService;
 
-    @Scheduled(cron = "0 0 1 * * ?") //每天凌晨1点执行一次
+    //每天凌晨1点执行一次
+//    @Scheduled(cron = "0 0 1 * * ?")
+
+//     表示每2秒 执行任务
+//    @Scheduled(cron = "0/2 * * * * ?")
+
+    @Scheduled(cron = "0 0 1 * * ?")
     public void cache_category(){
         System.out.println("被执行。。。。");
         QueryWrapper<GoodsCategory> wrapper = new QueryWrapper<GoodsCategory>()

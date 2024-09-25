@@ -65,14 +65,14 @@ public class BaseWebConfig implements WebMvcConfigurer{
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         //开发过程的路径
-//        String winPath = PathUtils.getClassLoadRootPath() + "/src/main/resources/static/files/";
+        String winPath = PathUtils.getClassLoadRootPath() + "/src/main/resources/static/files/";
 
         //在部署项目的路径是：classes/static/files/
 //        String winPath = PathUtils.getClassLoadRootPath() + "classes/static/files/";
 
 
         //在dockerCompose部署项目的路径是：supermarket/classes/static/files/
-        String winPath = PathUtils.getClassLoadRootPath() + "supermarket/classes/static/files/";
+//        String winPath = PathUtils.getClassLoadRootPath() + "supermarket/classes/static/files/";
 
 
 

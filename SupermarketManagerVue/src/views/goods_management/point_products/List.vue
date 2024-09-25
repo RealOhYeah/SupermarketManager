@@ -2,7 +2,7 @@
  * @Author: Oh...Yeah!!! 614988210@qq.com
  * @Date: 2024-09-02 21:47:56
  * @LastEditors: Oh...Yeah!!! 614988210@qq.com
- * @LastEditTime: 2024-09-22 14:26:48
+ * @LastEditTime: 2024-09-25 21:42:20
  * @FilePath: \SupermarketManagerVue\src\views\goods_management\point_products\List.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -36,7 +36,7 @@
                     @click="newBtn"
                     style="font-size: 18px"
                 >
-                    <i class="iconfont icon-r-add" style="font-size: 18px"> </i>
+                    <i class="iconfont icon-r-add" style="font-size: 18px; "> </i>
                     创建积分商品</el-button
                 >
             </el-col>
@@ -120,7 +120,7 @@
             </div>
         </div>
         <!--创建-->
-        <el-dialog title="创建积分商品" :visible.sync="newVisable" width="50%">
+        <el-dialog title="创建积分商品" :visible.sync="newVisable" width="350px">
             <el-form
                 :model="newForm"
                 :rules="rules"
@@ -524,6 +524,8 @@ export default {
 };
 </script>
 <style>
+ 
+
 .table {
     height: 320px;
 }
