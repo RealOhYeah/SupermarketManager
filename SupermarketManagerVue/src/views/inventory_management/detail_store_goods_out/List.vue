@@ -167,8 +167,7 @@
                             <el-input type="number" @change="
                                     () => {
                                         if (
-                                            this.goodsNum_max <
-                                            this.newForm.goodsNum
+                                            this.goodsNum_max < this.newForm.goodsNum 
                                         ) {
                                             this.newForm.goodsNum =
                                                 this.goodsNum_max;
